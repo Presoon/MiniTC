@@ -53,7 +53,15 @@ namespace MiniTC.ViewModel
                     {
                         fileName = Path.GetFileName(f);
                         destinationFile = Path.Combine(RightSidePanel.PathName, fileName);
-                        File.Copy(f,destinationFile, true);
+                        
+						try
+						{
+							File.Copy(f,destinationFile, true);
+						}
+						catch (Exception e)
+						{
+							MessageBox.Show($"Błąd: {e}");
+						}
                     }
                 }
             }
@@ -63,8 +71,15 @@ namespace MiniTC.ViewModel
                 var f = Path.GetFileName(fileName);
                 destinationFile = Path.Combine(RightSidePanel.PathName, f);
                 LeftSidePanel.File = null;
-
-                File.Copy(fileName,destinationFile,true);
+				
+				try
+				{
+					File.Copy(fileName,destinationFile,true);
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show($"Błąd: {e}");
+				}
             }
 
             LeftSidePanel.RefreshList(LeftSidePanel.PathName);
